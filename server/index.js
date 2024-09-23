@@ -9,18 +9,6 @@ const cors = require('cors');
     app.use(cors());
     app.use(express.json());
 
-    // Helper function to check for empty fields
-    
-    const checkEmptyFields = (fields) => { 
-        for (const field of fields) { 
-            if (typeof field === 'string' && field.trim() === "") { 
-                return false; } 
-                if (field === undefined || field === null){
-                    return false;
-                }
-            } return true; 
-        }; 
-
  //  User Endpoints 
 
  // Get all users by name
