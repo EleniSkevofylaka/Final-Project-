@@ -13,21 +13,11 @@ const cors = require('cors');
 
  // Get all users by name
     app.get('/users', async (req, res) => { 
-
-        const name = req.query.name;
-
-        if (!name) { 
-            return res.status(400).json({ message: 'Name is required' }); }
-
-    try { 
+    
+        try { 
         //Search for users whose names match the query (case-insensitive)
         const result = await pool.query(
-            'SELECT * FROM users WHERE name ILIKE ($1)',
-            [`%${name}%`]
-        ); 
-        if (result.rows.length === 0) {
-            return res.status(404).json({message: 'Name not found'});
-        }
+            'SELECT * FROM users');
             
         res.status(200).json(result.rows); 
         //Return the matched users
@@ -65,23 +55,20 @@ const cors = require('cors');
             
 // Delete a user by ID and name
         
-    app.delete('/users/delete', async (req, res) => { 
+    app.delete('/users/:id', async (req, res) => { 
 
-    const {id, name } = req.body; 
-
-    //Check if user ID and name are provided
-    if (!id || !name) { 
-        return res.status(400).json({ message: 'User ID and name are required' }); }
+    const {id } = req.params; 
             
     try { 
 
         //Delete the user with the matching ID and name 
          const result = await pool.query(
-            'DELETE FROM Users WHERE user_id = $1 AND name ILIKE $2', 
-            [id, name]); 
+            'DELETE FROM Users WHERE user_id = $1', 
+            [id]
+        ); 
 
             if (result.rowCount === 0) { 
-                return res.status(404).json({ message: 'User not found or does not match the provided name' }); } 
+                return res.status(404).json({ message: 'User not found' }); } 
                     
         res.status(200).json({ message: 'User deleted' }); 
                 
@@ -97,22 +84,11 @@ const cors = require('cors');
  
  app.get('/wash-types', async (req, res) => { 
 
-    const name = req.query.name;
-
-    if (!name) { 
-        return res.status(400).json({ message: 'Name is required' }); }
-    
     try { 
-        // Search for wash types that match the name (case-insensitive)
+        // Retrive all wash-types from the database
         const result = await pool.query(
-            'SELECT * FROM WashTypes WHERE name ILIKE ($1)',
-            [`%${name}%`]
+            'SELECT * FROM washtypes'
         );
-
-        if (result.rows.length === 0) {
-            return res.status(404).json({message: 'Wash type not found'});
-        }
-            //Return the matched wash types
             res.status(200).json(result.rows); 
         
         } catch (error) { 
@@ -144,25 +120,27 @@ const cors = require('cors');
             } 
         }); 
         
-    // Update an existing wash type by ID 
+    // Update an existing wash type by name 
         
-    app.put('/wash-types/update', async (req, res) => { 
-            
-    const { name, description, price, duration, washtype_id } = req.body;
-
+    app.put('/wash-types/:id', async (req, res) => { 
+    
+    const { id } = req.params;
+    const { name, description, price, duration } = req.body;
+    
     // Check if all required fields are provided 
-    if (!washtype_id || !name || !description || !price || !duration) { 
+    if (!name || !description || !price || !duration) { 
         return res.status(400).json({ message: 'All are required' }); }
-            
+           
     try { 
         //Update the wash type in the database
         const result = await pool.query( 
             'UPDATE WashTypes SET name = $1, description = $2, price = $3, duration = $4 WHERE washtype_id = $5', 
-            [name, description, price, duration, washtype_id] ); 
+            [name, description, price, duration, id] ); 
 
             if (result.rowCount === 0) { 
-                return res.status(404).json({ message: 'Wash-type not found or does not match the provided ID' }); } 
+                return res.status(404).json({ message: 'Wash-type not found or does not match the provided name' }); } 
                     
+            
         res.status(200).json({ message: 'Wash type updated' }); 
                 
     } catch (error) { 
@@ -172,20 +150,16 @@ const cors = require('cors');
             
     // Delete a wash type by ID and name 
             
-    app.delete('/wash-types/delete', async (req, res) => { 
+    app.delete('/wash-types/:id', async (req, res) => { 
                  
-    const {washtype_id, name} = req.body;
+    const {id} = req.params;
         
-    //Check if the wash type ID and name are provided
-    if (!washtype_id || !name) { 
-        return res.status(400).json({ message: 'Name and wash-type ID are required' }); }
-    
 
     try { 
         // Delete the wash types with the matching ID and name 
        const result = await pool.query(
-            'DELETE FROM WashTypes WHERE washtype_id = $1 AND name ILIKE $2', 
-            [washtype_id, name]); 
+            'DELETE FROM WashTypes WHERE washtype_id = $1', 
+            [id]); 
 
             if (result.rowCount === 0) { 
                 return res.status(404).json({ message: 'Wash-type not found or does not match the provided name' }); } 
@@ -246,21 +220,16 @@ app.post('/bookings/create', async (req, res) => {
 
 // Delete a booking by booking ID and license plate
 
-app.delete('/bookings/delete', async (req, res) => { 
+app.delete('/bookings/:id', async (req, res) => { 
     
-    const { booking_id, license_plate } = req.body; 
-
-    // Check if the booking ID and license plate are provided
-    if (!booking_id || !license_plate) { 
-        return res.status(400).json({ message: 'license_plate and wash-type ID are required' }); }
-    
+    const {id} = req.params; 
 
 
     try { 
         // Delete the booking with the matching ID and license plate 
        const result = await pool.query(
-            'DELETE FROM Bookings WHERE booking_id = $1 AND license_plate = $2', 
-            [booking_id, license_plate]); 
+            'DELETE FROM Bookings WHERE booking_id = $1', 
+            [id]); 
 
             if (result.rowCount === 0) { 
                 return res.status(404).json({ message: 'License plate not found or does not match the provided ID' }); } 
