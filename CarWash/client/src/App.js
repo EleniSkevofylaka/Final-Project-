@@ -15,28 +15,27 @@ import Footer from './components/Footer';
 function App() { 
   return (
      <Router> 
-      <div> 
+        {/* Inclued the Header component at the top of every page */}
         <Header />
+        {/* Define a container for the main content with full view height and width*/}
         <div className='vh-100 vw-100'>
           <Routes> 
+            {/* Route to render HomePage component at the root URL */}
             <Route path="/" element={<HomePage />} /> 
-
+              {/* Admin- related routes*/}
             <Route path="/admin" element={<AdminHome />} /> 
-            
             <Route path="/admin/manage-users" element={<ManageUsers />} />
             <Route path="/admin/manage-wash-types" element={<ManageWashTypes />} />
             <Route path="/admin/manage-bookings" element={<ManageBookings />} />
-            
-
+                {/* User-related routes*/}
               <Route path="/user" element={<UserHome />} />
-              
               <Route path="/user/register" element={<RegisterUser />} />
               <Route path="/user/booking" element={<AddBooking />} />
-            
           </Routes> 
         </div> 
+        {/* Inclued the Footer component at the bottom of every page */}
         <Footer />
-      </div>
+    
     </Router> 
   ); 
 } 

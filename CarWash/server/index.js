@@ -3,27 +3,28 @@ const express = require("express");
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 
-    const app = express();
-    const pool = require("./db");
+const app = express();
+const pool = require("./db");
 
-    app.use(cors());
-    app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
- //  User Endpoints 
+ //=====================  USER ENDPOINTS ====================//
 
- // Get all users by name
+ // Get all users 
     app.get('/users', async (req, res) => { 
     
         try { 
-        //Search for users whose names match the query (case-insensitive)
+        //Retrieve all users from the 'users' table
         const result = await pool.query(
             'SELECT * FROM users');
             
         res.status(200).json(result.rows); 
-        //Return the matched users
+        //Return users in JSON format 
         
     } catch (error) { 
-        res.status(500).json({ message: error.message }); 
+        res.status(500).json({ message: error.message });
+        //Handle any errors 
     } 
     }); 
     
@@ -38,7 +39,7 @@ const cors = require('cors');
         return res.status(400).json({ message: 'Name, email, and password are required' }); } 
         
     try { 
-            //Hash the user's password for security
+            //Hash the user's password using bcrypt
         const hashedPassword = await bcrypt.hash(password, 10); 
         
         //Insert the new user into the database
@@ -53,7 +54,7 @@ const cors = require('cors');
     } 
     }); 
             
-// Delete a user by ID and name
+// Delete a user by ID
         
     app.delete('/users/:id', async (req, res) => { 
 
@@ -61,12 +62,12 @@ const cors = require('cors');
             
     try { 
 
-        //Delete the user with the matching ID and name 
+        //Delete the user with the matching ID 
          const result = await pool.query(
             'DELETE FROM Users WHERE user_id = $1', 
             [id]
         ); 
-
+            // Check if the user was found and deleted 
             if (result.rowCount === 0) { 
                 return res.status(404).json({ message: 'User not found' }); } 
                     
@@ -78,18 +79,20 @@ const cors = require('cors');
     });
 
 
- // Wash Type Endpoints
+ //====================== WASH TYPE ENDPOINTS ========================//
  
- // Get all wash types by name 
+ // Get all wash types 
  
  app.get('/wash-types', async (req, res) => { 
 
     try { 
-        // Retrive all wash-types from the database
+        // Retrive all wash types from the 'washtypes' table
         const result = await pool.query(
             'SELECT * FROM washtypes'
         );
-            res.status(200).json(result.rows); 
+        //Return wash types in JSON format
+            res.status(200).json(result.rows);
+
         
         } catch (error) { 
             res.status(500).json({ message: error.message }); 
@@ -108,7 +111,7 @@ const cors = require('cors');
             
         
         try { 
-            // Insert the new wash type into the database 
+            // Insert the new wash type into the 'washtype' table 
             await pool.query( 
                 'INSERT INTO WashTypes (name, description, price, duration) VALUES ($1, $2, $3, $4)', 
                 [name, description, price, duration] ); 
@@ -120,7 +123,7 @@ const cors = require('cors');
             } 
         }); 
         
-    // Update an existing wash type by name 
+    // Update an existing wash type by ID 
         
     app.put('/wash-types/:id', async (req, res) => { 
     
@@ -132,11 +135,11 @@ const cors = require('cors');
         return res.status(400).json({ message: 'All are required' }); }
            
     try { 
-        //Update the wash type in the database
+        //Update the wash type in the 'washtype' tabel by ID
         const result = await pool.query( 
             'UPDATE WashTypes SET name = $1, description = $2, price = $3, duration = $4 WHERE washtype_id = $5', 
             [name, description, price, duration, id] ); 
-
+            //Check if the wash type was found and updated
             if (result.rowCount === 0) { 
                 return res.status(404).json({ message: 'Wash-type not found or does not match the provided name' }); } 
                     
@@ -148,7 +151,7 @@ const cors = require('cors');
     } 
     }); 
             
-    // Delete a wash type by ID and name 
+    // Delete a wash type by ID  
             
     app.delete('/wash-types/:id', async (req, res) => { 
                  
@@ -156,11 +159,11 @@ const cors = require('cors');
         
 
     try { 
-        // Delete the wash types with the matching ID and name 
+        // Delete the wash types with the matching ID from the 'washtypes' table 
        const result = await pool.query(
             'DELETE FROM WashTypes WHERE washtype_id = $1', 
             [id]); 
-
+            //Check if the wash type was found and deleted 
             if (result.rowCount === 0) { 
                 return res.status(404).json({ message: 'Wash-type not found or does not match the provided name' }); } 
                         
@@ -172,13 +175,13 @@ const cors = require('cors');
     });
 
 
-// Booking Endpoints
+//============================= BOOKING ENDPOINTS =====================//
 // Get all bookings 
 
 app.get('/bookings', async (req, res) => { 
     
     try { 
-        // Retrieve all bookings from the database
+        // Retrieve all bookings from the the 'bookinds' table
         const result = await pool.query(
             'SELECT * FROM Bookings'); 
             
@@ -200,13 +203,13 @@ app.post('/bookings/create', async (req, res) => {
     return res.status(400).json({ message: 'All fields are required' }); } 
 
     try { 
-        // Ensure the user exists in the database
+        // Ensure the user exists in the 'users' table
         const userCheck = await pool.query(
             'SELECT * FROM users WHERE user_id = $1', [user_id]); 
             if (userCheck.rowCount === 0) { 
                 return res.status(400).json({ message: 'User does not exist' }); } 
         
-        // Inserts the new bookings into the database
+        // Inserts the new bookings into the 'bookings' table
         await pool.query( 
             'INSERT INTO Bookings (user_id, car_make, car_model, car_year, license_plate, wash_type, date, time, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
             [ user_id, car_make, car_model, car_year, license_plate, wash_type, date, time, status  || 'Pending'] ); 
@@ -218,7 +221,7 @@ app.post('/bookings/create', async (req, res) => {
         }
 }); 
 
-// Delete a booking by booking ID and license plate
+// Delete a booking by booking ID 
 
 app.delete('/bookings/:id', async (req, res) => { 
     
@@ -226,11 +229,11 @@ app.delete('/bookings/:id', async (req, res) => {
 
 
     try { 
-        // Delete the booking with the matching ID and license plate 
+        // Delete the booking with the matching ID from the 'bookings' table 
        const result = await pool.query(
             'DELETE FROM Bookings WHERE booking_id = $1', 
             [id]); 
-
+            //Check if the booking was found and deleted
             if (result.rowCount === 0) { 
                 return res.status(404).json({ message: 'License plate not found or does not match the provided ID' }); } 
                 

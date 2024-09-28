@@ -25,22 +25,22 @@ import { Link } from 'react-router-dom';
 function HomePage() { 
     return ( 
         <div> 
-            {/* Hero Section with Background Image */} 
+            {/* Hero Section - Jumbotron for main welcome message */} 
             <div className="jumbotron jumbotron-fluid text-black text-center bg-light" 
                 style={{ 
-                    backgroundSize: 'cover', 
-                    backgroundPosition: 'center', 
                     height: '70vh', 
                     display: 'flex', 
                     justifyContent: 'center', 
                     alignItems: 'center', 
                     flexDirection: 'column' 
                 }}> 
+                {/* Main heading and introduction text */}
                 <h1 className="display-4">Welcome to Clean Car Wash!</h1> 
                 <p className="lead">At Clean Car Wash, we provide top-notch car cleaning services to make your vehicle shine like new. 
                     Our dedicated team uses high-quality products and techniques to ensure your car is spotless and well cared for. 
                     Choose us for a professional touch and exceptional results!</p> 
                 <div> 
+                    {/* Links to User and AAdmin HomePages */}
                     <Link to="/user" className="btn btn-lg btn-primary mx-2">User Home</Link> 
                     <Link to="/admin" className="btn btn-lg btn-secondary mx-2">Admin Home</Link> 
                 </div> 
@@ -49,7 +49,8 @@ function HomePage() {
             {/* Car Wash Packages Section */} 
             <div className="container my-5"> 
                 <h3 className="text-center text-info mb-4">Our Car Wash Packages</h3> 
-                <div className="row justify-content-center"> {/* Basic Wash */} 
+                <div className="row justify-content-center"> 
+                    {/* Basic Wash Package card*/} 
                     <div className="col-lg-3 col-md-6 mb-4"> 
                         <div className="card h-100 shadow-sm border-0" style={{ borderRadius: '15px' }}> 
                             <div className="card-header bg-primary text-white">Basic Wash</div> 
@@ -62,7 +63,7 @@ function HomePage() {
                             </div> 
                         </div> 
                     </div> 
-                    {/* Deluxe Wash */} 
+                    {/* Deluxe Wash package card */} 
                     <div className="col-lg-3 col-md-6 mb-4"> 
                         <div className="card h-100 shadow-sm border-0" style={{ borderRadius: '15px' }}> 
                             <div className="card-header bg-success text-white">Deluxe Wash</div> 
@@ -75,7 +76,7 @@ function HomePage() {
                             </div> 
                         </div> 
                     </div> 
-                    {/* Premium Wash */} 
+                    {/* Premium Wash package card */} 
                     <div className="col-lg-3 col-md-6 mb-4"> 
                         <div className="card h-100 shadow-sm border-0" style={{ borderRadius: '15px' }}> 
                             <div className="card-header bg-danger text-white">Premium Wash</div> 
@@ -90,8 +91,6 @@ function HomePage() {
                     </div> 
                 </div> 
             </div> 
-            {/* Additional Information Section */} 
-           
         </div> 
         
 );
