@@ -9,11 +9,13 @@
   ## Features
 
    ### User Functionality
+
     - **Booking System**: Users can book a car wash by providing details such as car make, model, year, license plate, wash type, and preferred date and time. 
     
     - **Registration**: Users can register to create an account (Note: The website does not include functionality for updating user information after registration). 
     
-    ### Admin Functionality 
+    
+### Admin Functionality 
     
     - **Manage Users**: Admins can view, edit, and delete users from the system. 
     
