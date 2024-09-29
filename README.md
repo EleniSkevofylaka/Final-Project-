@@ -23,7 +23,7 @@
     
     - **Manage Bookings**: Admins can view and delete car wash bookings. 
     
-    ### Frontend 
+### Frontend 
     
     - **React**: The website is built using React for a responsive and dynamic UI. 
     
@@ -37,7 +37,7 @@
     
     - **Bootstrap**: Styling is achieved using Bootstrap, providing a clean and modern UI. A custom **dark blue theme** is applied across the site with different shades of blue for consistency. 
     
-    ### Backend 
+### Backend 
     
     - **Node.js and Express**: The backend API is built with Express to handle routing and CRUD operations. 
     
