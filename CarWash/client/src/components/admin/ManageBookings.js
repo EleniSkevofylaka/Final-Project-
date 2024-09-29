@@ -33,19 +33,19 @@ function ManageBookings() {
     }; 
     
     return ( 
-        <div> 
+        <div className='container mt-5'> 
             {/* Page title */}
-            <h2 className='text-center'>Manage Bookings</h2>
+            <h2 className='text-center text-dark mb-4' style={{ fontWeight: 'bold', letterSpacing: '1px'}}>Manage Bookings</h2>
             {/* Conditionally render bookings list if available*/} 
             {bookings.length > 0 ? ( 
-                <ul className="list-group"> 
+                <ul className="list-group shadow-lg"> 
                 {/* Map over the bookings array to display each bookings */}
                 {bookings.map((booking) => ( 
-                    <li key={booking.booking_id} className="list-group-item d-flex justify-content-between align-items-center"> 
+                    <li key={booking.booking_id} className="list-group-item d-flex justify-content-between align-items-center" style={{ backgroundColor: '#007bff', borderRadius: '10px', marginBottom:'10px', fontSize: '1.1rem', color: '#ffffff', padding: '15px'}} > 
                     {/* Display booking details */}
                     {booking.car_make} - {booking.car_model} - {booking.car_year} - {booking.license_plate} - {booking.wash_type} - {booking.date} - {booking.time}
                         {/* Button to delete the selected booking*/} 
-                        <button className="btn btn-danger btn-sm" onClick={() => handleDelete(booking.booking_id)} > Delete </button> 
+                        <button className="btn btn-danger btn-sm" style={{ borderRadius: '20px', fontWeight: 'bold', padding: '8px 16px', fontSize: '0.9rem' }} onClick={() => handleDelete(booking.booking_id)} > Delete </button> 
                     </li> 
                 ))} 
                 </ul> 

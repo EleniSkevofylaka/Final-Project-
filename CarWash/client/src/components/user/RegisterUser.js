@@ -38,24 +38,24 @@ function RegisterUser() {
         }; 
         
         return ( 
-            <div> 
-                <h2>Register User</h2> 
+            <div className='container mt-5'> 
+                <h2 className='text-center text-dark mb-4' style={{ fontWeight: 'bold', letterSpacing: '1px'}}>Register User</h2> 
                 {/* Form for registering a new user */}
-                <form onSubmit={handleSubmit}> 
+                <form onSubmit={handleSubmit} className='shadow-lg p-4 rounded' style={{ backgroundColor: '#f8f9fa'}}> 
                     <div className="mb-3"> 
-                        <label className="form-label">Name</label> 
-                        <input type="text" name="name" className="form-control" value={user.name} onChange={handleChange} required /> 
+                        <label className="form-label text-dark">Name</label> 
+                        <input type="text" name="name" className="form-control" style={{ borderRadius: '8px'}} value={user.name} onChange={handleChange} required /> 
                     </div> 
                     <div className="mb-3"> 
-                        <label className="form-label">Email</label> 
-                        <input type="email" name="email" className="form-control" value={user.email} onChange={handleChange} required /> 
+                        <label className="form-label text-dark">Email</label> 
+                        <input type="email" name="email" className="form-control" style={{ borderRadius: '8px'}} value={user.email} onChange={handleChange} required /> 
                     </div> 
                     <div className="mb-3"> 
-                        <label className="form-label">Password</label> 
-                        <input type="password" name="password" className="form-control" value={user.password} onChange={handleChange} required /> 
+                        <label className="form-label text-dark">Password</label> 
+                        <input type="password" name="password" className="form-control" style={{ borderRadius: '8px'}} value={user.password} onChange={handleChange} required /> 
                     </div> 
                     {/* Button to submit the form*/}
-                    <button type="submit" className="btn btn-primary">Register</button> 
+                    <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: '#0056b3', borderRadius: '20px', fontWeight:'bold'}} >Register</button> 
                 </form> 
             </div> 
         ); 

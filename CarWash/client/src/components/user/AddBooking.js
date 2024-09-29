@@ -39,24 +39,24 @@ function AddBooking() {
     }; 
     
     return ( 
-        <div> 
-            <h2>Add Booking</h2> 
+        <div className='container mt-5'> 
+            <h2 className='text-center text-dark mb-4' style={{ fontWeight: 'bold', letterSpacing: '1px'}}>Add Booking</h2> 
             {/* Form for creating a new booking*/}
-            <form onSubmit={handleSubmit}> 
+            <form onSubmit={handleSubmit} className='shadow-lg p-4 rounded' style={{ backgroundColor: '#f8f9fa'}}> 
                 <div className="mb-3"> 
-                    <label className="form-label">User ID</label> 
-                    <input type="text" name="userId" className="form-control" value={booking.userId} onChange={handleChange} required /> 
+                    <label className="form-label text-dark">User ID</label> 
+                    <input type="text" name="userId" className="form-control" style={{ borderRadius: '8px'}} value={booking.userId} onChange={handleChange} required /> 
                 </div> 
                 <div className="mb-3"> 
-                    <label className="form-label">Wash Type ID</label> 
-                    <input type="text" name="washTypeId" className="form-control" value={booking.washTypeId} onChange={handleChange} required /> 
+                    <label className="form-label text-dark">Wash Type ID</label> 
+                    <input type="text" name="washTypeId" className="form-control" style={{ borderRadius: '8px'}} value={booking.washTypeId} onChange={handleChange} required /> 
                 </div> 
                 <div className="mb-3"> 
-                    <label className="form-label">Date</label> 
-                    <input type="date" name="date" className="form-control" value={booking.date} onChange={handleChange} required /> 
+                    <label className="form-label text-dark">Date</label> 
+                    <input type="date" name="date" className="form-control" style={{ borderRadius: '8px'}} value={booking.date} onChange={handleChange} required /> 
                 </div> 
                 {/* Button to submit the form */}
-                <button type="submit" className="btn btn-primary">Add Booking</button> 
+                <button type="submit" className="btn btn-primary w-100" style={{ backgroundColor: '#0056b3', borderRadius: '20px', fontWeight:'bold'}}>Add Booking</button> 
             </form> 
         </div> 
     );

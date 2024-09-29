@@ -53,39 +53,30 @@ function HomePage() {
                     {/* Basic Wash Package card*/} 
                     <div className="col-lg-3 col-md-6 mb-4"> 
                         <div className="card h-100 shadow-sm border-0" style={{ borderRadius: '15px' }}> 
-                            <div className="card-header bg-primary text-white">Basic Wash</div> 
+                            <div className="card-header" style={{backgroundColor: '#007bff', color: 'white'}}>Basic Wash</div> 
                             <div className="card-body"> 
                                 <p className="card-text">Exterior hand wash and towel dry</p> 
-                                <h5 className="text-primary"><strong>$15</strong></h5> 
-                            </div> 
-                            <div className="card-footer bg-transparent"> 
-                                <button className="btn btn-outline-primary btn-block">Select</button> 
-                            </div> 
+                                <h5 style={{ color: '#007bff' }}><strong>$15</strong></h5> 
+                            </div>  
                         </div> 
                     </div> 
                     {/* Deluxe Wash package card */} 
                     <div className="col-lg-3 col-md-6 mb-4"> 
                         <div className="card h-100 shadow-sm border-0" style={{ borderRadius: '15px' }}> 
-                            <div className="card-header bg-success text-white">Deluxe Wash</div> 
+                            <div className="card-header" style={{backgroundColor: '#0056b3', color: 'white'}}>Deluxe Wash</div> 
                             <div className="card-body"> 
                                 <p className="card-text">Exterior wash, towel dry, tire shine, and windows</p> 
-                                <h5 className="text-success"><strong>$25</strong></h5> 
-                            </div> 
-                            <div className="card-footer bg-transparent"> 
-                                <button className="btn btn-outline-success btn-block">Select</button> 
+                                <h5 style={{ color: '#0056b3' }}><strong>$25</strong></h5> 
                             </div> 
                         </div> 
                     </div> 
                     {/* Premium Wash package card */} 
                     <div className="col-lg-3 col-md-6 mb-4"> 
                         <div className="card h-100 shadow-sm border-0" style={{ borderRadius: '15px' }}> 
-                            <div className="card-header bg-danger text-white">Premium Wash</div> 
+                            <div className="card-header" style={{backgroundColor: '#003366', color: 'white'}}>Premium Wash</div> 
                             <div className="card-body"> 
                                 <p className="card-text">Full exterior and interior clean</p> 
-                                <h5 className="text-danger"><strong>$40</strong></h5> 
-                            </div> 
-                            <div className="card-footer bg-transparent"> 
-                                <button className="btn btn-outline-danger btn-block">Select</button> 
+                                <h5 style={{ color: '#0056b3' }}><strong>$40</strong></h5> 
                             </div> 
                         </div> 
                     </div> 
