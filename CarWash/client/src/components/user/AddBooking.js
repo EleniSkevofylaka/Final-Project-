@@ -76,7 +76,14 @@ function AddBooking() {
                 </div> 
                 <div className="mb-3"> 
                     <label className="form-label text-dark">Wash Type</label> 
-                    <input type="text" name="wash_type" className="form-control" style={{ borderRadius: '8px'}} value={booking.wash_type} onChange={handleChange} required /> 
+                    <select name="wash_type" className="form-control" style={{ borderRadius: '8px'}} value={booking.wash_type} onChange={handleChange} required > 
+                        <option value="">Select Wash Type</option>
+                        <option value="Premium Wash">Premium Wash</option>
+                        <option value="Deluxe Wash">Deluxe Wash</option>
+                        <option value="Basic Wash">Basic Wash</option>
+                        </select>
+
+
                 </div> 
                 <div className="mb-3"> 
                     <label className="form-label text-dark">Date</label> 
