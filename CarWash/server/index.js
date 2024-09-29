@@ -196,23 +196,24 @@ app.get('/bookings', async (req, res) => {
     
 app.post('/bookings/create', async (req, res) => { 
     
-    const { user_id, car_make, car_model, car_year, license_plate, wash_type, date, time, status } = req.body; 
+    const { car_make, car_model, car_year, license_plate, wash_type, date, time } = req.body;
+    console.log('received data:', req.body); 
     
  // Check if all required fields are provided  
- if (!user_id || !car_make || !car_model || !car_year || !license_plate || !wash_type || !date || !time) { 
+ if (!car_make || !car_model || !car_year || !license_plate || !wash_type || !date || !time) { 
     return res.status(400).json({ message: 'All fields are required' }); } 
 
     try { 
         // Ensure the user exists in the 'users' table
-        const userCheck = await pool.query(
+       {/* const userCheck = await pool.query(
             'SELECT * FROM users WHERE user_id = $1', [user_id]); 
             if (userCheck.rowCount === 0) { 
                 return res.status(400).json({ message: 'User does not exist' }); } 
-        
+            */}
         // Inserts the new bookings into the 'bookings' table
         await pool.query( 
-            'INSERT INTO Bookings (user_id, car_make, car_model, car_year, license_plate, wash_type, date, time, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', 
-            [ user_id, car_make, car_model, car_year, license_plate, wash_type, date, time, status  || 'Pending'] ); 
+            'INSERT INTO bookings (car_make, car_model, car_year, license_plate, wash_type, date, time) VALUES ($1, $2, $3, $4, $5, $6, $7)', 
+            [car_make, car_model, car_year, license_plate, wash_type, date, time] ); 
             
             res.status(201).json({ message: 'Booking created' }); 
         
